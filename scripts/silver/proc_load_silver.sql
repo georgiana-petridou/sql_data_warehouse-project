@@ -38,17 +38,16 @@ BEGIN
         INSERT INTO silver.crm_cust_info (
             cst_id,
             cst_key,
-            cst_firtname,
+            cst_firstname,
             cst_lastname,
-            cst_material_status,
+            cst_marital_status,
             cst_gndr,
-            cst_create_date
-        )
+            cst_create_date        )
         SELECT cst_id,
                cst_key,
-               TRIM(cst_firtname) AS cst_firtname,
+               TRIM(cst_firstname) AS cst_firstname,
                TRIM(cst_lastname) AS cst_lastname,
-               CASE WHEN UPPER(TRIM(cst_material_status)) = 'S' THEN 'Single' WHEN UPPER(TRIM(cst_material_status)) = 'M' THEN 'Married' ELSE 'Unknown' END AS cst_material_status, -- Normalize marital status values to readable format
+               CASE WHEN UPPER(TRIM(cst_marital_status)) = 'S' THEN 'Single' WHEN UPPER(TRIM(cst_marital_status)) = 'M' THEN 'Married' ELSE 'Unknown' END AS cst_marital_status, -- Normalize marital status values to readable format
                CASE WHEN UPPER(TRIM(cst_gndr)) = 'F' THEN 'Female' WHEN UPPER(TRIM(cst_gndr)) = 'M' THEN 'Male' ELSE 'Unknown' END AS cst_gndr, -- Normalize gender values to readable format
                cst_create_date
         FROM   (SELECT *,
@@ -65,8 +64,8 @@ BEGIN
         PRINT '>> Inserting Data Into: silver.crm_prd_info';
         INSERT INTO silver.crm_prd_info (
             prd_id,
-            prd_key,
             cat_id,
+            prd_key,
             prd_nm,
             prd_cost,
             prd_line,
@@ -187,3 +186,9 @@ BEGIN
         PRINT '=====================================================';
     END CATCH
 END
+
+
+
+       
+        
+                         
